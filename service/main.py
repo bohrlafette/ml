@@ -16,7 +16,7 @@ FEMALE = 1
 
 def user(name, gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses):
     print "adding user " + name
-    return [gender, numChildren, yearBorn, ownsHouse, numCats, numDogs, numHorses]
+    return [gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses]
 
 def item(name, secureFamily, secureProperty, retirement, health, animals):
     print "adding item " + name
@@ -107,10 +107,10 @@ for prediction in predictions:
 
 
 # Calculate and print the recall at 10
-r_at_k = tensorrec.eval.recall_at_k(model, interactions,
-                                    k=10,
-                                    user_features=user_features,
-                                    item_features=item_features)
+#r_at_k = tensorrec.eval.recall_at_k(model, interactions,
+#                                    k=10,
+#                                    user_features=user_features,
+#                                    item_features=item_features)
 #print(np.mean(r_at_k))
 
 def map(predictions):
@@ -125,5 +125,11 @@ def map(predictions):
     }
 
 def predict(user):
-    result = model.predict(sp.sparse.csr_matrix(np.matrix([user])), item_features)
+    print user
+
+    print scaler.transform([user])
+    result = model.predict(sp.sparse.csr_matrix(scaler.transform([user])), item_features)
     return map(result[0])
+
+def interact(user, interaction):
+    model.fit(interaction, scaler.transform(user), item_features)
