@@ -45,7 +45,37 @@ def createMidAgedSingle():
             int(round(random.uniform(0.2,1.0))),
             int(round(random.uniform(0.0,0.65)))))
 
-def generateInteraction(numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses):
+def createJohnDoeYoungAgedSingle():
+    return user('JohnDoeYoungAgedSingle', 
+            random.randint(0,1), 
+            0, 
+            0, 
+            2000,
+            1, 
+            0, 
+            0)
+
+def createJohnDoeMidAgedFamilyMember():
+    return user('JohnDoeMidAgedFamilyMember', 
+            random.randint(0,1), 
+            2, 
+            1, 
+            1980,
+            0, 
+            1, 
+            0)
+
+def createJohnDoeMidAgedSingle():
+    return user('JohnDoeMidAgedSingle', 
+            random.randint(0,1), 
+            0, 
+            1, 
+            1990,
+            2, 
+            0, 
+            1)
+
+def generateInteraction(name, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses):
 
     haft = int(round(random.uniform(0.2,1.0)))
     zahn = int(round(random.uniform(-0.6,1.0)))
@@ -77,6 +107,18 @@ def generateInteraction(numChildren, ownsHouse, yearBorn, numCats, numDogs, numH
     
     return interaction(haft, foerder, zahn, pferd, hunde, hausrat, kfz)
 
+def generateJohnDoeYoungAgedSingleInteraction():
+
+    return interaction(-1, -1, -1, -1, -1, -1, 1)
+
+def generateJohnDoeMidAgedFamilyMemberInteraction():
+
+    return interaction(1, 1, 1, -1, 1, 1, -1)
+
+def generateJohnDoeMidAgedSingle():
+
+    return interaction(1, 1, 1, 1, -1, 1, -1)
+
 items = [
     item("haft", YES, YES, NO, NO, NO),
     item("foerder", YES, YES, YES, NO, NO),
@@ -96,6 +138,7 @@ def createSingleTestdata(typ):
         testUser = createMidAgedSingle()
 
     generatedInteraction = generateInteraction(
+                                        testUser[0],
                                         testUser[1],
                                         testUser[2],
                                         testUser[3],
@@ -105,15 +148,31 @@ def createSingleTestdata(typ):
                                         
     return testUser, generatedInteraction
 
+def createJohnDoeSingleTestdata(typ):
+    if typ == 0:
+        testUser = createJohnDoeYoungAgedSingle()
+        generatedInteraction = generateJohnDoeYoungAgedSingleInteraction()
+    elif typ == 1:
+        testUser = createJohnDoeMidAgedFamilyMember()
+        generatedInteraction = generateJohnDoeMidAgedFamilyMemberInteraction()
+    else:
+        testUser = createJohnDoeMidAgedSingle()
+        generatedInteraction = generateJohnDoeMidAgedSingle()
+
+    return testUser, generatedInteraction
+
 def createMultipleTestdata(count):
     i = 1
-    initialUser, initialInteraction = createSingleTestdata(random.randint(0,2),)
+    initialUser, initialInteraction = createJohnDoeSingleTestdata(random.randint(0,2),)
     users = [initialUser]
     interactions = [initialInteraction]
 
     while i < count:
 
-        testUser, generatedInteraction = createSingleTestdata(random.randint(0,2),)
+        if (i%2)==0:
+            testUser, generatedInteraction = createJohnDoeSingleTestdata(random.randint(0,2),)
+        else:
+            testUser, generatedInteraction = createSingleTestdata(random.randint(0,2),)
 
         users = np.append(users, [testUser], axis=0)
         interactions = np.append(interactions, [generatedInteraction], axis=0)
@@ -128,4 +187,4 @@ def createMultipleTestdata(count):
     
     return users, interactions
 
-createMultipleTestdata(10)
+createMultipleTestdata(20)
