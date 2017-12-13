@@ -3,6 +3,7 @@ import scipy as sp
 import tensorrec
 import tensorflow as tf
 import random
+from sklearn import preprocessing
 
 from testdaten import createTestdata
 
@@ -15,7 +16,7 @@ FEMALE = 1
 
 def user(name, gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses):
     print "adding user " + name
-    return [gender, numChildren, ownsHouse, numCats, numDogs, numHorses]
+    return [gender, numChildren, yearBorn, ownsHouse, numCats, numDogs, numHorses]
 
 def item(name, secureFamily, secureProperty, retirement, health, animals):
     print "adding item " + name
@@ -38,9 +39,9 @@ users = [
     user("Manfreda", FEMALE, 1, NO, 1990, 0, 0, 0),
 ]
 
-print(tf.nn.l2_normalize(users, 1))
+users = preprocessing.normalize(np.asarray(users, dtype=np.float), norm='l2')
 
-interaction =    np.matrix([
+interaction = np.matrix([
         [0, 0, 0, -1, -1],
         [1, 0, 1, 0, 0],
         [1, 1, 0, 0, 0],
