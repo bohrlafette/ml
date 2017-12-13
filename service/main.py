@@ -14,7 +14,6 @@ YES = 1
 MALE = 0
 FEMALE = 1
 
-
 def user(name, gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses):
     print "adding user " + name
     return [gender, numChildren, yearBorn, ownsHouse, numCats, numDogs, numHorses]
@@ -62,14 +61,14 @@ items = [
     item("kfz", NO, YES, NO, NO, NO)
 ]
 
-users, generatedInteractions = createMultipleTestdata(50)
+users, generatedInteractions = createMultipleTestdata(100)
 
 # train the normalization
 scaler = MinMaxScaler(feature_range=(0, 1))
 scaler = scaler.fit(users)
 #print('Min: %f, Max: %f' % (scaler.data_min_, scaler.data_max_))
 # normalize the dataset and print the first 5 rows
-users = scaler.transform(users)
+normalizedUsers = scaler.transform(users)
 print("########### normalized ###########")
 print(users)
 
@@ -79,7 +78,7 @@ print(users)
 #print("normalized")
 #print(users)
 
-user_features = sp.sparse.csr_matrix(users)
+user_features = sp.sparse.csr_matrix(normalizedUsers)
 interactions = sp.sparse.csr_matrix(generatedInteractions)
 item_features = sp.sparse.csr_matrix(np.matrix(items))
 
@@ -96,9 +95,15 @@ predictions = model.predict(user_features=user_features,
 
 print(predictions)
 
+i = 0
 for prediction in predictions:
+    print('gender=%i, numChildren=%i, ownsHouse=%i, yearBorn=%i, numCats=%i, numDogs=%i, numHorses=%i' 
+    % (users[i][0],users[i][1],users[i][2],users[i][3],users[i][4],users[i][5],users[i][6])) 
+    print('haft=%f, foerder=%f, zahn=%f, pferd=%f, hund=%f, hausrat=%f, kfz=%f'
+    % (generatedInteractions[i][0],generatedInteractions[i][1],generatedInteractions[i][2],generatedInteractions[i][3],generatedInteractions[i][4],generatedInteractions[i][5],generatedInteractions[i][6])) 
     print('haft=%2.2f, foerder=%2.2f, zahn=%2.2f, pferd=%2.2f, hund=%2.2f, hausrat=%2.2f, kfz=%2.2f' 
     % (prediction[0],prediction[1],prediction[2],prediction[3],prediction[4],prediction[5],prediction[6]))  
+    i = i + 1
 
 
 # Calculate and print the recall at 10
