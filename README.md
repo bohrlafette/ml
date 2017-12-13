@@ -1,6 +1,11 @@
 # ml
 POC zu ML
 
+## Install using pip
+
+`cd` to `service`
+
+    pip install -r requirements.txt
 
 ## Example Request
 
