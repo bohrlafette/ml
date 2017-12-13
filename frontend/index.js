@@ -10,4 +10,5 @@ app.use('/fonts/', express.static('node_modules/bootstrap/dist/fonts'));
 
 app.use('/', express.static('dist'));
  
+console.log("Listening on http://localhost:3000");
 app.listen(3000)
