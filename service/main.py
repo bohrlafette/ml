@@ -4,6 +4,7 @@ import tensorrec
 import tensorflow as tf
 import random
 from sklearn import preprocessing
+from sklearn.preprocessing import MinMaxScaler
 
 from testdaten import createMultipleTestdata
 
@@ -61,10 +62,22 @@ items = [
     item("kfz", NO, YES, NO, NO, NO)
 ]
 
-users, generatedInteractions = createMultipleTestdata(20)
+users, generatedInteractions = createMultipleTestdata(50)
+
+# train the normalization
+scaler = MinMaxScaler(feature_range=(0, 1))
+scaler = scaler.fit(users)
+#print('Min: %f, Max: %f' % (scaler.data_min_, scaler.data_max_))
+# normalize the dataset and print the first 5 rows
+users = scaler.transform(users)
+print("########### normalized ###########")
+print(users)
 
 # normalize
-users = preprocessing.normalize(np.asarray(users, dtype=np.float), norm='l2')
+#users = preprocessing.normalize(np.asarray(users, dtype=np.float), norm='l2')
+
+#print("normalized")
+#print(users)
 
 user_features = sp.sparse.csr_matrix(users)
 interactions = sp.sparse.csr_matrix(generatedInteractions)
@@ -72,7 +85,10 @@ item_features = sp.sparse.csr_matrix(np.matrix(items))
 
 
 # Fit the model
-model.fit(interactions, user_features, item_features, epochs=750, verbose=False)
+model.fit(interactions, user_features, item_features, epochs=2000, verbose=False)
+
+#print(user_features)
+#print(interactions)
 
 # Predict scores for all users and all items
 predictions = model.predict(user_features=user_features,
@@ -80,13 +96,17 @@ predictions = model.predict(user_features=user_features,
 
 print(predictions)
 
+for prediction in predictions:
+    print('haft=%2.2f, foerder=%2.2f, zahn=%2.2f, pferd=%2.2f, hund=%2.2f, hausrat=%2.2f, kfz=%2.2f' 
+    % (prediction[0],prediction[1],prediction[2],prediction[3],prediction[4],prediction[5],prediction[6]))  
+
 
 # Calculate and print the recall at 10
 r_at_k = tensorrec.eval.recall_at_k(model, interactions,
                                     k=10,
                                     user_features=user_features,
                                     item_features=item_features)
-print(np.mean(r_at_k))
+#print(np.mean(r_at_k))
 
 def map(predictions):
     return {

@@ -119,13 +119,13 @@ def createMultipleTestdata(count):
         interactions = np.append(interactions, [generatedInteraction], axis=0)
 
         i = i + 1
+
+    print("[gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses]")
+    print(users)
+    
+    print("[haft, foerder, zahn, pferd, hunde, hausrat, kfz]")
+    print(interactions)
+    
     return users, interactions
 
-
-users, interactions = createMultipleTestdata(20)
-
-print("[gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses]")
-print(users)
-
-print("[haft, foerder, zahn, pferd, hunde, hausrat, kfz]")
-print(interactions)
+createMultipleTestdata(10)
