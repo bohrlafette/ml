@@ -5,7 +5,7 @@ import tensorflow as tf
 import random
 from sklearn import preprocessing
 
-from testdaten import createTestdata
+from testdaten import createMultipleTestdata
 
 NO = 0
 YES = 1
@@ -27,7 +27,7 @@ def item(name, secureFamily, secureProperty, retirement, health, animals):
 
 model = tensorrec.TensorRec(user_repr_graph=tensorrec.representation_graphs.relu_representation_graph, item_repr_graph=tensorrec.representation_graphs.relu_representation_graph)
 
-
+'''
 users = [
     user("Hans", MALE, 1, NO, 1990, 0, 0, 0),
     user("Carla", FEMALE, 0, YES, 1985, 1, 0, 0),
@@ -39,8 +39,6 @@ users = [
     user("Manfreda", FEMALE, 1, NO, 1990, 0, 0, 0),
 ]
 
-users = preprocessing.normalize(np.asarray(users, dtype=np.float), norm='l2')
-
 interaction = np.matrix([
         [0, 0, 0, -1, -1],
         [1, 0, 1, 0, 0],
@@ -51,38 +49,27 @@ interaction = np.matrix([
         [1, 0, 0, 1, 1],
         [1, 0, 0, 0, 0]
     ])
+'''
 
 items = [
     item("haft", YES, YES, NO, NO, NO),
     item("foerder", YES, YES, YES, NO, NO),
     item("zahn", YES, NO, NO, YES, NO),
     item("pferd", NO, YES, NO, NO, YES),
-    item("hund", NO, YES, NO, NO, YES)#,
-  #  item("hausrat", YES, YES, NO, NO, NO),
-   # item("kfz", NO, YES, NO, NO, NO)
+    item("hund", NO, YES, NO, NO, YES),
+    item("hausrat", YES, YES, NO, NO, NO),
+    item("kfz", NO, YES, NO, NO, NO)
 ]
 
-'''
-initialUser, initialInteraction = createTestdata(random.randint(0,2),)
-users = [initialUser]
-interactions = [initialInteraction]
+users, generatedInteractions = createMultipleTestdata(20)
 
-print users
-i = 0
-while i <= 10:
-    testUser, generatedInteraction = createTestdata(random.randint(0,2),)
+# normalize
+users = preprocessing.normalize(np.asarray(users, dtype=np.float), norm='l2')
 
-    print testUser
-    users = np.append(users, [testUser], axis=0)
-    interactions = np.append(interactions, [generatedInteraction], axis=0)
-   
-    i = i + 1
-
-'''
 user_features = sp.sparse.csr_matrix(users)
+interactions = sp.sparse.csr_matrix(generatedInteractions)
 item_features = sp.sparse.csr_matrix(np.matrix(items))
 
-interactions = sp.sparse.csr_matrix(interaction)
 
 # Fit the model
 model.fit(interactions, user_features, item_features, epochs=750, verbose=False)
