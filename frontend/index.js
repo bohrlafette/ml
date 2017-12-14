@@ -1,4 +1,5 @@
 var express = require('express')
+var proxy = require('http-proxy-middleware');
 var app = express()
 
 app.use('/css/', express.static('node_modules/bootstrap/dist/css'));
@@ -11,6 +12,8 @@ app.use('/js/', express.static('node_modules/angular-route'));
 app.use('/fonts/', express.static('node_modules/bootstrap/dist/fonts'));
 
 app.use('/', express.static('dist'));
+
+app.use('/api', proxy({target: 'http://localhost:5000', changeOrigin: true, pathRewrite: {'^/api/' : '/'}}));
  
 console.log("Listening on http://localhost:3000");
 app.listen(3000)

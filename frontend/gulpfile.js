@@ -2,8 +2,8 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var ngAnnotate = require('gulp-ng-annotate');
 
-var srcJs = ['src/js/app.js', 'src/js/**/*.js'];
-var assets = ['src/**/*.html'];
+var srcJs = ['src/app.js', 'src/**/*.js'];
+var assets = ['src/**/*.html', 'src/**/*.css'];
 
 gulp.task('build', function() {
  return gulp.src(srcJs)
@@ -17,7 +17,7 @@ gulp.task("assets", function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task("watch", function () {
+gulp.task("watch", ["default"], function () {
     return gulp.watch(srcJs.concat(assets), ['build', 'assets']);
 });
 
