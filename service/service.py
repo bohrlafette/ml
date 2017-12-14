@@ -20,6 +20,10 @@ def predict():
     )
     return jsonify(engine.predict(predictionUser))
 
+@app.route("/predict", methods = ["GET"])
+def predictGet():
+    return "try POST :)"
+
 @app.route("/interaction", methods = ["POST"])
 def interaction():
     json = request.json
