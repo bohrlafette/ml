@@ -1,1 +1,1 @@
-angular.module("App", ["ngResource", "ngRoute"]);
+angular.module("App", ["ngResource", "ngRoute", "ngAnimate", "ui.bootstrap"]);

@@ -51,32 +51,80 @@
 </form>
 
 <div class="well" ng-show="predictResult">
-    <div class="input-group">
-        <span class="input-group-addon">Haft</span>
-        <input type="text" value="{{ predictResult.haft | number : 3}}" class="form-control" readonly>
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.haft" type="{{ predictResult.raw.haft | toType }}">
+                    Haft
+                </uib-progressbar>
+            </span>
+            <input type="text" value="{{ predictResult.raw.haft | number : 3}}" class="form-control" readonly>
+        </div>
     </div>
-    <div class="input-group">
-        <span class="input-group-addon">KFZ</span>
-        <input type="text" value="{{ predictResult.kfz | number : 3}}" class="form-control" readonly>
+    
+    <div class="row">
+        <div class="input-group">
+                <span class="input-group-addon">
+                        <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.kfz" type="{{ predictResult.raw.kfz | toType }}">
+                            KFZ
+                        </uib-progressbar>
+                    </span>
+            <input type="text" value="{{ predictResult.raw.kfz | number : 3}}" class="form-control" readonly>
+        </div>
     </div>
-    <div class="input-group">
-        <span class="input-group-addon">Hausrat</span>
-        <input type="text" value="{{ predictResult.hausrat | number : 3}}" class="form-control" readonly>
+
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">
+                    <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.hausrat" type="{{ predictResult.raw.hausrat | toType }}">
+                        Hausrat
+                    </uib-progressbar>
+                </span>
+            <input type="text" value="{{ predictResult.raw.hausrat | number : 3}}" class="form-control" readonly>
+        </div>
     </div>
-    <div class="input-group">
-        <span class="input-group-addon">Foerder</span>
-        <input type="text" value="{{ predictResult.foerder | number : 3}}" class="form-control" readonly>
+    
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.foerder" type="{{ predictResult.raw.foerder | toType }}">
+                    Foerder
+                </uib-progressbar>
+            </span>
+            <input type="text" value="{{ predictResult.raw.foerder | number : 3}}" class="form-control" readonly>
+        </div>
     </div>
-    <div class="input-group">
-        <span class="input-group-addon">Hund</span>
-        <input type="text" value="{{ predictResult.hund | number : 3}}" class="form-control" readonly>
+    
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.hund" type="{{ predictResult.raw.hund | toType }}">
+                    Hund
+                </uib-progressbar>
+            </span>
+            <input type="text" value="{{ predictResult.raw.hund | number : 3}}" class="form-control" readonly>
+        </div>
     </div>
-    <div class="input-group">
-        <span class="input-group-addon">Pferd</span>
-        <input type="text" value="{{ predictResult.pferd | number : 3}}" class="form-control" readonly>
+    
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.pferd" type="{{ predictResult.raw.pferd | toType }}">
+                    Pferd
+                </uib-progressbar>
+            </span>
+            <input type="text" value="{{ predictResult.raw.pferd | number : 3}}" class="form-control" readonly>
+        </div>
     </div>
-    <div class="input-group">
-        <span class="input-group-addon">Zahn</span>
-        <input type="text" value="{{ predictResult.zahn | number : 3}}" class="form-control" readonly>
+    
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.zahn" type="{{ predictResult.raw.zahn | toType }}">
+                    Zahn
+                </uib-progressbar>
+            </span>
+            <input type="text" value="{{ predictResult.raw.zahn | number : 3}}" class="form-control" readonly>
+        </div>
     </div>
 </div>
