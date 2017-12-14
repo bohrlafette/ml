@@ -3,7 +3,7 @@ angular.module("App")
 .controller("MainController", function ($scope, PredictionService, $filter) {
     $scope.predictUser = {
         name: "",
-        gender: "0",
+        gender: 0,
         numChildren: 0,
         ownsHouse: false,   
         yearBorn: 1990,

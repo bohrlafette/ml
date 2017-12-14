@@ -6,10 +6,12 @@
 
     <div class="input-group">
         <span class="input-group-addon">Geschlecht</span>
-        <select ng-model="predictUser.gender" class="form-control" >
-            <option value="0">männlich</option>
-            <option value="1">weiblich</option>
-        </select>
+        <span class="form-control" style="padding:0px">
+            <div class="btn-group btn-group-justified" style="height:100%">
+                <label class="btn btn-sm btn-primary" ng-model="predictUser.gender" uib-btn-radio="0">männlich</label>
+                <label class="btn btn-sm btn-primary" ng-model="predictUser.gender" uib-btn-radio="1">weiblich</label>
+            </div>
+        </span>
     </div>
 
     <div class="input-group">
@@ -20,7 +22,12 @@
 
     <div class="input-group">
         <span class="input-group-addon">Hausbesitz</span>
-        <input type="checkbox" ng-model="predictUser.ownsHouse" class="form-control">
+        <span class="form-control" style="padding:0px">
+            <div class="btn-group btn-group-justified" style="height:100%">
+                <label class="btn btn-primary" ng-model="predictUser.ownsHouse" uib-btn-radio="true">Ja</label>
+                <label class="btn btn-primary" ng-model="predictUser.ownsHouse" uib-btn-radio="false">Nein</label>
+            </div>
+        </span>
     </div>
 
     <div class="input-group">
