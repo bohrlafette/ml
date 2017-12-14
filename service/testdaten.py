@@ -47,7 +47,7 @@ def createMidAgedSingle():
 
 def createJohnDoeYoungAgedSingle():
     return user('JohnDoeYoungAgedSingle', 
-            random.randint(0,1), 
+            1, 
             0, 
             0, 
             2000,
@@ -57,7 +57,7 @@ def createJohnDoeYoungAgedSingle():
 
 def createJohnDoeMidAgedFamilyMember():
     return user('JohnDoeMidAgedFamilyMember', 
-            random.randint(0,1), 
+            1, 
             2, 
             1, 
             1980,
@@ -67,7 +67,7 @@ def createJohnDoeMidAgedFamilyMember():
 
 def createJohnDoeMidAgedSingle():
     return user('JohnDoeMidAgedSingle', 
-            random.randint(0,1), 
+            1, 
             0, 
             1, 
             1990,
@@ -87,23 +87,23 @@ def generateInteraction(name, numChildren, ownsHouse, yearBorn, numCats, numDogs
     kfz = 0
 
     if numDogs > 0:
-        hunde = int(round(random.uniform(0.4,1.0)))
+        hunde = 1
 
     if numHorses > 0:
-        pferd = int(round(random.uniform(0.4,1.0)))
+        pferd = 1
 
     if ownsHouse > 0:
-        hausrat= int(round(random.uniform(0.4,1.0)))
+        hausrat= 1
 
     if yearBorn <= 1992:
         foerder = int(round(random.uniform(0.3,1.0)))
     else:
         foerder = int(round(random.uniform(-0.7,0.6)))
 
-    if yearBorn <= 1997:
-        kfz = int(round(random.uniform(-0.7,0.7)))
+    if yearBorn <= 1995:
+        kfz = int(round(random.uniform(-0.7,0.9)))
     else:
-        kfz = int(round(random.uniform(0.3,1.0)))
+        kfz = 1
     
     return interaction(haft, foerder, zahn, pferd, hunde, hausrat, kfz)
 
@@ -117,7 +117,7 @@ def generateJohnDoeMidAgedFamilyMemberInteraction():
 
 def generateJohnDoeMidAgedSingle():
 
-    return interaction(1, 1, 1, 1, -1, 1, -1)
+    return interaction(1, 1, 1, 1, -1, 1, 1)
 
 items = [
     item("haft", YES, YES, NO, NO, NO),
@@ -169,10 +169,10 @@ def createMultipleTestdata(count):
 
     while i < count:
 
-        if (i%2)==0:
-            testUser, generatedInteraction = createJohnDoeSingleTestdata(random.randint(0,2),)
-        else:
-            testUser, generatedInteraction = createSingleTestdata(random.randint(0,2),)
+        #if (i%2)==0:
+        testUser, generatedInteraction = createJohnDoeSingleTestdata(random.randint(0,2),)
+        #else:
+        #    testUser, generatedInteraction = createSingleTestdata(random.randint(0,2),)
 
         users = np.append(users, [testUser], axis=0)
         interactions = np.append(interactions, [generatedInteraction], axis=0)

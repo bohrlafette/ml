@@ -61,7 +61,7 @@ items = [
     item("kfz", NO, YES, NO, NO, NO)
 ]
 
-users, generatedInteractions = createMultipleTestdata(100)
+users, generatedInteractions = createMultipleTestdata(3000)
 
 # train the normalization
 scaler = MinMaxScaler(feature_range=(0, 1))
@@ -84,7 +84,7 @@ item_features = sp.sparse.csr_matrix(np.matrix(items))
 
 
 # Fit the model
-model.fit(interactions, user_features, item_features, epochs=2000, verbose=False)
+model.fit(interactions, user_features, item_features, epochs=500, verbose=False)
 
 #print(user_features)
 #print(interactions)
@@ -102,7 +102,8 @@ for prediction in predictions:
     print('haft=%f, foerder=%f, zahn=%f, pferd=%f, hund=%f, hausrat=%f, kfz=%f'
     % (generatedInteractions[i][0],generatedInteractions[i][1],generatedInteractions[i][2],generatedInteractions[i][3],generatedInteractions[i][4],generatedInteractions[i][5],generatedInteractions[i][6])) 
     print('haft=%2.2f, foerder=%2.2f, zahn=%2.2f, pferd=%2.2f, hund=%2.2f, hausrat=%2.2f, kfz=%2.2f' 
-    % (prediction[0],prediction[1],prediction[2],prediction[3],prediction[4],prediction[5],prediction[6]))  
+    % (prediction[0],prediction[1],prediction[2],prediction[3],prediction[4],prediction[5],prediction[6])) 
+    print("#")
     i = i + 1
 
 
@@ -133,3 +134,6 @@ def predict(user):
 
 def interact(user, interaction):
     model.fit(interaction, scaler.transform(user), item_features)
+
+predictUser = user("Anna", 1, 0, 0, 2000, 0, 0, 0)
+print(predict(predictUser))
