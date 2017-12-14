@@ -61,7 +61,7 @@ items = [
     item("kfz", NO, YES, NO, NO, NO)
 ]
 
-users, generatedInteractions = createMultipleTestdata(3000)
+users, generatedInteractions = createMultipleTestdata(6000)
 
 # train the normalization
 scaler = MinMaxScaler(feature_range=(0, 1))
