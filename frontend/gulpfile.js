@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var concat = require('gulp-concat');
 var ngAnnotate = require('gulp-ng-annotate');
 
-var srcJs = ['src/js/app.js', 'src/js/**/*.js'];
+var srcJs = ['src/app.js', 'src/**/*.js'];
 var assets = ['src/**/*.html'];
 
 gulp.task('build', function() {
