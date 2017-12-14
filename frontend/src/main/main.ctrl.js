@@ -13,10 +13,12 @@ angular.module("App")
     };
 
     $scope.predict = function () {
-        $scope.predictUser.gender = parseInt($scope.predictUser.gender);
+        var request = angular.copy($scope.predictUser);
+        request.gender = parseInt(request.gender);
+        request.ownsHouse = (request.ownsHouse) ? 1 : 0;
         PredictionService.query(
             {},
-            $scope.predictUser,
+            request,
             function(success) {
                 console.log(success);
                 $scope.predictResult = success;

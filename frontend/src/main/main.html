@@ -1,47 +1,54 @@
-<div class="input-group">
-    <span class="input-group-addon">Name</span>
-    <input type="text" class="form-control" placeholder="Name" ng-model="predictUser.user">
-</div>
+<form>
+    <div class="input-group">
+        <span class="input-group-addon">Name</span>
+        <input type="text" class="form-control" placeholder="Name" ng-model="predictUser.user">
+    </div>
 
-<div class="input-group">
-    <span class="input-group-addon">Geschlecht</span>
-    <select ng-model="predictUser.gender" class="form-control" >
-        <option value="0">männlich</option>
-        <option value="1">weiblich</option>
-    </select>
-</div>
+    <div class="input-group">
+        <span class="input-group-addon">Geschlecht</span>
+        <select ng-model="predictUser.gender" class="form-control" >
+            <option value="0">männlich</option>
+            <option value="1">weiblich</option>
+        </select>
+    </div>
 
-<div class="input-group">
-    <span class="input-group-addon">Geburtsjahr</span>
-    <input type="number" min="1930" max="2017" ng-model="predictUser.yearBorn" class="form-control" >
-</div>
+    <div class="input-group">
+        <span class="input-group-addon">Geburtsjahr</span>
+        <span class="input-group-addon">{{ predictUser.yearBorn }}</span>
+        <input type="range" min="1980" max="2000" ng-model="predictUser.yearBorn" class="form-control" >
+    </div>
 
-<div class="input-group">
-    <span class="input-group-addon">Hausbesitz</span>
-    <input type="checkbox" ng-model="predictUser.ownsHouse" class="form-control">
-</div>
+    <div class="input-group">
+        <span class="input-group-addon">Hausbesitz</span>
+        <input type="checkbox" ng-model="predictUser.ownsHouse" class="form-control">
+    </div>
 
-<div class="input-group">
-    <span class="input-group-addon">Kinder</span>
-    <input type="number" min="0" max="5" ng-model="predictUser.numChildren" class="form-control">
-</div>
+    <div class="input-group">
+        <span class="input-group-addon">Kinder</span>
+        <span class="input-group-addon">{{ predictUser.numChildren }}</span>
+        <input type="range" min="0" max="2" ng-model="predictUser.numChildren" class="form-control">
+    </div>
 
-<div class="input-group">
-    <span class="input-group-addon">Katzen</span>
-    <input type="number" min="0" max="5" ng-model="predictUser.numCats" class="form-control">
-</div>
+    <div class="input-group">
+        <span class="input-group-addon">Katzen</span>
+        <span class="input-group-addon">{{ predictUser.numCats }}</span>
+        <input type="range" min="0" max="1" ng-model="predictUser.numCats" class="form-control">
+    </div>
 
-<div class="input-group">
-    <span class="input-group-addon">Hunde</span>
-    <input type="number" min="0" max="3" ng-model="predictUser.numDogs" class="form-control">
-</div>
+    <div class="input-group">
+        <span class="input-group-addon">Hunde</span>
+        <span class="input-group-addon">{{ predictUser.numDogs }}</span>
+        <input type="range" min="0" max="1" ng-model="predictUser.numDogs" class="form-control">
+    </div>
 
-<div class="input-group">
-    <span class="input-group-addon">Pferde</span>
-    <input type="number" min="0" max="3" ng-model="predictUser.numHorses" class="form-control">
-</div>
+    <div class="input-group">
+        <span class="input-group-addon">Pferde</span>
+        <span class="input-group-addon">{{ predictUser.numHorses }}</span>
+        <input type="range" min="0" max="1" ng-model="predictUser.numHorses" class="form-control">
+    </div>
 
-<button class="btn btn-primary" ng-click="predict()">predict</button>
+    <input type="submit" style="display:block; margin:10px 0px; width: 100%" class="btn btn-primary" ng-click="predict()" value="predict">
+</form>
 
 <div class="well" ng-show="predictResult">
     <div class="input-group">

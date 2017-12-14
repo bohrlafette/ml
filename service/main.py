@@ -84,7 +84,7 @@ item_features = sp.sparse.csr_matrix(np.matrix(items))
 
 
 # Fit the model
-model.fit(interactions, user_features, item_features, epochs=500, verbose=False)
+model.fit(interactions, user_features, item_features, epochs=1000, verbose=False)
 
 #print(user_features)
 #print(interactions)
