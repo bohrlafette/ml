@@ -18,9 +18,9 @@ def user(name, gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHo
     print "adding user " + name
     return [gender, numChildren, ownsHouse, yearBorn, numCats, numDogs, numHorses]
 
-def item(name, secureFamily, secureProperty, retirement, health, animals):
+def item(name, secureFamily, secureProperty, retirement, health, horse, dog, kfz):
     print "adding item " + name
-    return [secureFamily, secureProperty, retirement, health, animals]
+    return [secureFamily, secureProperty, retirement, health, horse, dog, kfz]
 
 # Build the model with default parameters
 #model = tensorrec.TensorRec()
@@ -52,16 +52,16 @@ interaction = np.matrix([
 '''
 
 items = [
-    item("haft", YES, YES, NO, NO, NO),
-    item("foerder", YES, YES, YES, NO, NO),
-    item("zahn", YES, NO, NO, YES, NO),
-    item("pferd", NO, YES, NO, NO, YES),
-    item("hund", NO, YES, NO, NO, YES),
-    item("hausrat", YES, YES, NO, NO, NO),
-    item("kfz", NO, YES, NO, NO, NO)
+    item("haft", YES, YES, NO, NO, NO, NO, NO),
+    item("foerder", YES, NO, YES, YES, NO, NO, NO),
+    item("zahn", YES, NO, NO, YES, NO, NO, NO),
+    item("pferd", NO, YES, NO, NO, YES, NO, NO),
+    item("hund", NO, YES, NO, NO, NO, YES, NO),
+    item("hausrat", NO, YES, NO, NO, NO, NO, NO),
+    item("kfz", NO, YES, NO, NO, NO, NO, YES)
 ]
 
-users, generatedInteractions = createMultipleTestdata(6000)
+users, generatedInteractions = createMultipleTestdata(900)
 
 # train the normalization
 scaler = MinMaxScaler(feature_range=(0, 1))
@@ -83,8 +83,11 @@ interactions = sp.sparse.csr_matrix(generatedInteractions)
 item_features = sp.sparse.csr_matrix(np.matrix(items))
 
 
+print("interactions")
+print(interactions)
+
 # Fit the model
-model.fit(interactions, user_features, item_features, epochs=1000, verbose=False)
+model.fit(interactions, user_features, item_features, epochs=200, verbose=False)
 
 #print(user_features)
 #print(interactions)
