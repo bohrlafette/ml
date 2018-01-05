@@ -12,8 +12,8 @@ def item(name, secureFamily, secureProperty, retirement, health, animals):
     #print "adding item " + name
     return [secureFamily, secureProperty, retirement, health, animals]
 
-def interaction(haft, foerder, zahn, pferd, hunde, hausrat, kfz):
-    return [haft, foerder, zahn, pferd, hunde, hausrat, kfz]
+def interaction(haft, foerder, zahn, pferd, hunde, hausrat, kfz, futter):
+    return [haft, foerder, zahn, pferd, hunde, hausrat, kfz, futter]
 
 def createYoungAgedSingle():
     return (user('YoungAgedSingle', 
@@ -109,25 +109,17 @@ def generateInteraction(name, numChildren, ownsHouse, yearBorn, numCats, numDogs
 
 def generateJohnDoeYoungAgedSingleInteraction():
 
-    return interaction(-1, -1, -1, -1, -1, -1, 1)
+    return interaction(-1, -1, -1, -1, -1, -1, 1, 0)
 
 def generateJohnDoeMidAgedFamilyMemberInteraction():
 
-    return interaction(1, 1, 1, -1, 1, 1, -1)
+    return interaction(1, 1, 1, -1, 1, 1, -1, 0)
 
 def generateJohnDoeMidAgedSingle():
 
-    return interaction(1, 1, 1, 1, -1, 1, 1)
+    return interaction(1, 1, 1, 1, -1, 1, 1, 0)
 
-items = [
-    item("haft", YES, YES, NO, NO, NO),
-    item("foerder", YES, YES, YES, NO, NO),
-    item("zahn", YES, NO, NO, YES, NO),
-    item("pferd", NO, YES, NO, NO, YES),
-    item("hunde", NO, YES, NO, NO, YES),
-    item("hausrat", YES, YES, NO, NO, NO),
-    item("kfz", NO, YES, NO, NO, NO)
-]
+
 
 def createSingleTestdata(typ):
     if typ == 0:
@@ -144,7 +136,8 @@ def createSingleTestdata(typ):
                                         testUser[3],
                                         testUser[4],
                                         testUser[5],
-                                        testUser[6])
+                                        testUser[6],
+                                        testUser[7])
                                         
     return testUser, generatedInteraction
 
