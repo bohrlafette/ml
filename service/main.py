@@ -50,7 +50,7 @@ interaction = np.matrix([
         [1, 0, 0, 0, 0]
     ])
 '''
-
+# def item(name, secureFamily, secureProperty, retirement, health, horse, dog, kfz):
 items = [
     item("haft", YES, YES, NO, NO, NO, NO, NO),
     item("foerder", YES, NO, YES, YES, NO, NO, NO),
@@ -58,10 +58,11 @@ items = [
     item("pferd", NO, YES, NO, NO, YES, NO, NO),
     item("hund", NO, YES, NO, NO, NO, YES, NO),
     item("hausrat", NO, YES, NO, NO, NO, NO, NO),
-    item("kfz", NO, YES, NO, NO, NO, NO, YES)
+    item("kfz", NO, YES, NO, NO, NO, NO, YES),
+    item("futter", NO, NO, NO, NO, YES, YES, NO)
 ]
 
-users, generatedInteractions = createMultipleTestdata(900)
+users, generatedInteractions = createMultipleTestdata(9000)
 
 # train the normalization
 scaler = MinMaxScaler(feature_range=(0, 1))
@@ -87,7 +88,7 @@ print("interactions")
 print(interactions)
 
 # Fit the model
-model.fit(interactions, user_features, item_features, epochs=200, verbose=False)
+model.fit(interactions, user_features, item_features, epochs=800, verbose=False)
 
 #print(user_features)
 #print(interactions)
@@ -102,10 +103,10 @@ i = 0
 for prediction in predictions:
     print('gender=%i, numChildren=%i, ownsHouse=%i, yearBorn=%i, numCats=%i, numDogs=%i, numHorses=%i' 
     % (users[i][0],users[i][1],users[i][2],users[i][3],users[i][4],users[i][5],users[i][6])) 
-    print('haft=%f, foerder=%f, zahn=%f, pferd=%f, hund=%f, hausrat=%f, kfz=%f'
-    % (generatedInteractions[i][0],generatedInteractions[i][1],generatedInteractions[i][2],generatedInteractions[i][3],generatedInteractions[i][4],generatedInteractions[i][5],generatedInteractions[i][6])) 
-    print('haft=%2.2f, foerder=%2.2f, zahn=%2.2f, pferd=%2.2f, hund=%2.2f, hausrat=%2.2f, kfz=%2.2f' 
-    % (prediction[0],prediction[1],prediction[2],prediction[3],prediction[4],prediction[5],prediction[6])) 
+    print('haft=%f, foerder=%f, zahn=%f, pferd=%f, hund=%f, hausrat=%f, kfz=%f, futter=%f'
+    % (generatedInteractions[i][0],generatedInteractions[i][1],generatedInteractions[i][2],generatedInteractions[i][3],generatedInteractions[i][4],generatedInteractions[i][5],generatedInteractions[i][6],generatedInteractions[i][7])) 
+    print('haft=%2.2f, foerder=%2.2f, zahn=%2.2f, pferd=%2.2f, hund=%2.2f, hausrat=%2.2f, kfz=%2.2f , futter=%2.2f' 
+    % (prediction[0],prediction[1],prediction[2],prediction[3],prediction[4],prediction[5],prediction[6],prediction[7])) 
     print("#")
     i = i + 1
 
@@ -125,7 +126,8 @@ def map(predictions):
         "pferd": predictions[3].item(),
         "hund": predictions[4].item(),
         "hausrat": predictions[5].item(),
-        "kfz": predictions[6].item()
+        "kfz": predictions[6].item(),
+        "futter": predictions[7].item()
     }
 
 def predict(user):
