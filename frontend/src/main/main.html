@@ -134,4 +134,16 @@
             <input type="text" value="{{ predictResult.raw.zahn | number : 3}}" class="form-control" readonly>
         </div>
     </div>
+
+    <div class="row">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <uib-progressbar class="progress active" style="margin-bottom:0px" value="predictResult.futter" type="{{ predictResult.raw.futter | toType }}">
+                    Futter
+                </uib-progressbar>
+            </span>
+            <input type="text" value="{{ predictResult.raw.futter | number : 3}}" class="form-control" readonly>
+        </div>
+    </div>
+
 </div>
