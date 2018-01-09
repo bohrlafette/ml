@@ -12,6 +12,10 @@ angular.module("App")
         numHorses: 0
     };
 
+    $scope.$watch("predictUser", function(){
+        $scope.predict();
+    }, true);
+
     $scope.predict = function () {
         var request = angular.copy($scope.predictUser);
         request.gender = parseInt(request.gender);
