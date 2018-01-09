@@ -8,8 +8,14 @@
         <span class="input-group-addon">Geschlecht</span>
         <span class="form-control" style="padding:0px">
             <div class="btn-group btn-group-justified" style="height:100%">
-                <label class="btn btn-sm btn-primary" ng-model="predictUser.gender" uib-btn-radio="0">männlich</label>
-                <label class="btn btn-sm btn-primary" ng-model="predictUser.gender" uib-btn-radio="1">weiblich</label>
+                <label class="btn btn-sm btn-primary" ng-model="predictUser.gender" uib-btn-radio="0">
+                    <i class="fa fa-fw fa-male"></i>
+                    männlich
+                </label>
+                <label class="btn btn-sm btn-primary" ng-model="predictUser.gender" uib-btn-radio="1">
+                    <i class="fa fa-fw fa-female"></i>
+                    weiblich
+                </label>
             </div>
         </span>
     </div>
@@ -24,8 +30,12 @@
         <span class="input-group-addon">Hausbesitz</span>
         <span class="form-control" style="padding:0px">
             <div class="btn-group btn-group-justified" style="height:100%">
-                <label class="btn btn-primary" ng-model="predictUser.ownsHouse" uib-btn-radio="true">Ja</label>
-                <label class="btn btn-primary" ng-model="predictUser.ownsHouse" uib-btn-radio="false">Nein</label>
+                <label class="btn btn-primary" ng-model="predictUser.ownsHouse" uib-btn-radio="true">
+                    <i class="fa fa-fw fa-check"></i>
+                </label>
+                <label class="btn btn-primary" ng-model="predictUser.ownsHouse" uib-btn-radio="false">
+                    <i class="fa fa-fw fa-times"></i>
+                </label>
             </div>
         </span>
     </div>
